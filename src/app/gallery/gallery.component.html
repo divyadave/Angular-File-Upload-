@@ -1,0 +1,16 @@
+<h1>Your Gallery</h1>
+<div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid>
+    <div>
+
+        <div class="uk-flex" *ngFor="let image of albumImages">
+            <div class="uk-card uk-card-hover uk-card-body" *ngFor="let singleImage of image.multiImages">
+                    <img [src]="getSantizeUrl(singleImage)" width="180" class="uk-margin-large-left uk-margin-medium-top" />
+            </div>
+                </div>
+                <div class="uk-card uk-card-hover uk-card-body">
+                        <img *ngIf="albumImages.userImage" [src]="getSantizeUrl(albumImages.userImage)" width="180" class="uk-margin-large-left uk-margin-medium-top" />
+                </div>
+           
+        </div>
+     </div>
+

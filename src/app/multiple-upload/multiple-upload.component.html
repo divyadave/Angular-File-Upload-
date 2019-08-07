@@ -1,0 +1,40 @@
+<form [formGroup]="multiForm" class="uk-form-horizontal uk-margin-large-top">
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-horizontal-text">Album Name</label>
+            <div class="uk-form-controls">
+                <input class="uk-input uk-flex uk-width-1-3" formControlName="albumName" id="form-horizontal-text"
+                    type="text" placeholder="Enter The Album Name" name="albumName">
+            </div>
+            <div class="uk-text-danger uk-flex uk-margin" *ngIf="(albumName.dirty || albumName.touched ) && multiForm.controls['albumName'].hasError('required')"
+                id="imageName" style="margin-left: 13.5em;">
+                Album Name is required
+            </div>
+        </div>
+    
+        <div class="uk-margin">
+            <div class="js-upload uk-placeholder uk-text-center uk-width-1-2 uk-margin-large-left">
+                <span uk-icon="icon: cloud-upload"></span>
+                <span class="uk-text-middle">Attach binaries by dropping them here or</span>
+                <div uk-form-custom>
+                    <input type="file" (change)="onFileUpload($event)" name="multiImages" multiple>
+                    <span class="uk-link"> selecting one</span>
+                </div>
+            </div>
+        </div>
+        <div class="uk-margin">
+             <div class="uk-flex">
+            <button class="uk-button formSubmit" [disabled]="multiForm.invalid" (click)="onSubmit()">Submit</button>
+            </div>
+        </div>
+        <div *ngIf="multiImages.length">
+            <div formArrayName="multiImages" *ngFor="let image of multiImages.controls; let i = index">
+            <div [formGroupName] = "i">
+            <img class="uk-flex uk-margin-large-left" [src]="image.value" width="180" />
+        
+        </div>
+        </div>
+        </div>
+    
+    
+    </form>

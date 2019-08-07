@@ -1,0 +1,50 @@
+<form [formGroup]="singleImageForm" class="uk-form-horizontal uk-margin-large-top">
+
+    <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">Name</label>
+        <div class="uk-form-controls">
+            <input class="uk-input uk-flex uk-width-1-3" formControlName="imageName" id="form-horizontal-text"
+                type="text" placeholder="Enter The Image Name" name="imageName">
+        </div>
+        <div class="uk-text-danger uk-flex uk-margin" *ngIf=" (imageName.dirty || imageName.touched) && singleImageForm.controls['imageName'].hasError('required')"
+            id="imageName" style="margin-left: 13.5em;">
+            Image Name is required
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">Date</label>
+        <div class="uk-form-controls">
+            <input class="uk-input uk-flex uk-width-1-3" id="form-horizontal-text" type="date"
+                formControlName="uploadDate" name="date" placeholder="Enter the Date"> 
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <div class="js-upload uk-placeholder uk-text-center uk-width-1-2 uk-margin-large-left">
+            <span uk-icon="icon: cloud-upload"></span>
+            <span class="uk-text-middle">Drop Files Here or</span>
+            <div uk-form-custom>
+                <input type="file" (change)="onFileUpload($event)" name="userImage">
+                <span class="uk-link">  Select One </span>
+            </div>
+        </div>
+        
+        <div class="uk-text-danger uk-flex uk-margin" *ngIf=" ((userImage.dirty || userImage.touched)) && singleImageForm.controls['userImage'].hasError('required')"
+            id="imageName" style="margin-left: 13.5em;">
+            Upload the Image
+        </div>
+        
+    </div>
+    <div class="uk-margin">
+         <div class="uk-flex">
+        <button class="uk-button uk-margin-medium-top formSubmit" [disabled]="singleImageForm.invalid" (click)="onSubmit()">Submit</button>
+        </div>
+    </div>
+    <div>
+        <img class="uk-flex uk-margin-large-left" [src]="getSantizeUrl(url)" width="180" />
+        
+    </div>
+
+
+</form>
